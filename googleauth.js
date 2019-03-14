@@ -58,15 +58,13 @@ var GoogleAuth;
     var user = GoogleAuth.currentUser.get();
     var isAuthorized = user.hasGrantedScopes(SCOPE);
     if (isAuthorized) {
-      $('#execute-request-button').html('Sign out');
-      $('#revoke-access-button').css('display', 'inline-block');
-      $('#auth-status').html('You are currently signed in and have granted ' +
-          'access to this app.');
+      $('#execute-request-button').text('Sign out');
+      $('#revoke-access-button').show();
+      $('#auth-status').html("");
     } else {
-      $('#execute-request-button').html('Sign In/Authorize');
-      $('#revoke-access-button').css('display', 'none');
-      $('#auth-status').html('You have not authorized this app or you are ' +
-          'signed out.');
+      $('#execute-request-button').text('Sign In');
+      $('#revoke-access-button').hide();
+      $('#auth-status').html('Please sign in to access ShuffleTube');
     }
   }
 
