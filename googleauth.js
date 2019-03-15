@@ -31,12 +31,8 @@ var GoogleAuth;
 
       // Call handleAuthClick function when user clicks on
       //      "Sign In/Authorize" button.
-      $('#execute-request-button').click(function() {
-        handleAuthClick();
-      });
-      $('#revoke-access-button').click(function() {
-        revokeAccess();
-      });
+      $('#execute-request-button').click(handleAuthClick);
+      $('#revoke-access-button').click(revokeAccess);
     });
   }
 
@@ -54,7 +50,7 @@ var GoogleAuth;
     GoogleAuth.disconnect();
   }
 
-    function setSigninStatus(isSignedIn) {
+  function setSigninStatus(isSignedIn) {
     var user = GoogleAuth.currentUser.get();
     var isAuthorized = user.hasGrantedScopes(SCOPE);
     if (isAuthorized) {
@@ -62,17 +58,43 @@ var GoogleAuth;
       $('#authorization-overlay').hide();
       $("#execute-request-button").remove();
       $('<button id="execute-request-button">Sign Out<i class="material-icons">lock</i></button>').appendTo("nav");
+      $('#execute-request-button').click(handleAuthClick);
       onAuth();
     } else {
       alert("Signed Out");
       $("#authorization-overlay").show();
       $('#revoke-access-button').hide();
-      $('#auth-status').html('Please sign in to access ShuffleTube');
       $("#execute-request-button").remove();
+      $('#auth-status').html('Please sign in to access ShuffleTube');
       $('<button id="execute-request-button">Sign In</button>').insertBefore("#revoke-access-button");
+      $('#execute-request-button').click(handleAuthClick);
     }
   }
 
   function updateSigninStatus(isSignedIn) {
     setSigninStatus();
   }
+
+  function start() {
+  // 2. Initialize the JavaScript client library.
+  gapi.client.init({
+    'apiKey': 'YOUR_API_KEY',
+    // Your API key will be automatically added to the Discovery Document URLs.
+    'discoveryDocs': ['https://people.googleapis.com/$discovery/rest'],
+    // clientId and scope are optional if auth is not required.
+    'clientId': 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+    'scope': 'profile',
+  }).then(function() {
+    // 3. Initialize and make the API request.
+    return gapi.client.people.people.get({
+      'resourceName': 'people/me',
+      'requestMask.includeField': 'person.names'
+    });
+  }).then(function(response) {
+    console.log(response.result);
+  }, function(reason) {
+    console.log('Error: ' + reason.result.error.message);
+  });
+};
+// 1. Load the JavaScript client library.
+gapi.load('client', start);
