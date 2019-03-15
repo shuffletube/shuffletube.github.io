@@ -54,21 +54,20 @@ var GoogleAuth;
     GoogleAuth.disconnect();
   }
 
-  function setSigninStatus(isSignedIn) {
+    function setSigninStatus(isSignedIn) {
     var user = GoogleAuth.currentUser.get();
     var isAuthorized = user.hasGrantedScopes(SCOPE);
     if (isAuthorized) {
-      $('#execute-request-button').text('Sign out');
       $('#revoke-access-button').show();
       $('#authorization-overlay').hide();
       $("#execute-request-button").remove();
-      $('<a class="nav" id="execute-request-button">Sign Out</a>').appendTo("nav");
+      $('<a class="nav" id="execute-request-button">Sign Out<i class="material-icons">lock</i></a>').appendTo("nav");
       onAuth();
     } else {
       $("#authorization-overlay").show();
-      $('#execute-request-button').text('Sign In');
       $('#revoke-access-button').hide();
       $('#auth-status').html('Please sign in to access ShuffleTube');
+      $('<button id="execute-request-button">Sign In</button>').appendTo("#authorization-overlay");
     }
   }
 
