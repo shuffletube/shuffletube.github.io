@@ -61,6 +61,8 @@ var GoogleAuth;
       $('#execute-request-button').text('Sign out');
       $('#revoke-access-button').show();
       $('#authorization-overlay').hide();
+      $("#execute-request-button").remove();
+      $('<a class="nav" id="execute-request-button">Sign Out</a>').append("nav");
       onAuth();
     } else {
       $('#execute-request-button').text('Sign In');
@@ -73,7 +75,7 @@ var GoogleAuth;
     setSigninStatus();
   }
 
-function start() {
+  function start() {
   // 2. Initialize the JavaScript client library.
   gapi.client.init({
     'apiKey': 'YOUR_API_KEY',
