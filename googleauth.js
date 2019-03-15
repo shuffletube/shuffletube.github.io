@@ -60,7 +60,8 @@ var GoogleAuth;
     if (isAuthorized) {
       $('#execute-request-button').text('Sign out');
       $('#revoke-access-button').show();
-      $('#auth-status').html("");
+      $('#authorization-overlay').hide();
+      onAuth();
     } else {
       $('#execute-request-button').text('Sign In');
       $('#revoke-access-button').hide();
