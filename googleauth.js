@@ -67,6 +67,7 @@ var GoogleAuth;
       $("#authorization-overlay").show();
       $('#revoke-access-button').hide();
       $('#auth-status').html('Please sign in to access ShuffleTube');
+      $("#execute-request-button").remove();
       $('<button id="execute-request-button">Sign In</button>').appendTo("#authorization-overlay");
     }
   }
