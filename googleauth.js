@@ -61,7 +61,7 @@ var GoogleAuth;
       $('#revoke-access-button').show();
       $('#authorization-overlay').hide();
       $("#execute-request-button").remove();
-      $('<a class="nav" id="execute-request-button">Sign Out<i class="material-icons">lock</i></a>').appendTo("nav");
+      $('<button id="execute-request-button">Sign Out<i class="material-icons">lock</i></button>').appendTo("nav");
       onAuth();
     } else {
       alert("Signed Out");
