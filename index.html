@@ -10,7 +10,7 @@
   <!-- <link rel="stylesheet" href="https://google-developers.appspot.com/_static/7bb14d2951/css/devsite-cyan.css"> -->
   <link rel="icon" href="shuffletube.png">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="index.js" defer></script>
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="googleauth.js"></script>
   <title>ShuffleTube</title>
@@ -22,11 +22,20 @@
       <img src="shuffletube.png" alt="icon" id="logoimg">
     </h2>
     <nav>
-      <a id="dashboard-a" class="nav" data->Home<i class="material-icons">home</i></a>
-      <a id="create-a" class="nav">Create<i class="material-icons">queue</i></a>
-      <a id="playlist-a" class="nav">Playlists<i class="material-icons">queue_music</i></a>
+      <a id="dashboard-a" class="nav active" data-section="#dashboard-section">
+        <span>Home<i class="material-icons">home</i></span>
+      </a>
+      <a id="create-a" class="nav" data-section="#create-section">
+        <span>Create<i class="material-icons">queue</i></span>
+      </a>
+      <a id="playlist-a" class="nav" data-section="#playlist-section">
+        <span>Playlists<i class="material-icons">queue_music</i></span>
+      </a>
       <!-- <div id="nav-playlists"></div> -->
-      <a id="settings-a" class="nav">Settings<i class="material-icons">settings</i></a>
+      <a id="settings-a" class="nav" data-section="#settings-section">
+        <span>Settings<i class="material-icons">settings</i></span>
+      </a>
+      <div id="active-background"></div>
     </nav>
   </header>
   <main>
@@ -87,9 +96,62 @@
       <div class="playlist-list">
         <div class="playlist">
           <img class="playlist-thumbnail" src="soberup.jpg" alt="playlist">
-          <h3 class="playlist-heading">Playlist Title</h3>
-          <p class="playlist-dscription">Playlist Description</p>
+          <div class="playlist-info-container">
+            <h3 class="playlist-heading">Playlist Title</h3>
+            <p class="playlist-description">Playlist Description</p>
+          </div>
+          <i class="material-icons">playlist_play</i>
+          <i class="material-icons">call_merge</i>
+          <i class="material-icons">call_split</i>
         </div>
+        <div class="playlist">
+          <img class="playlist-thumbnail" src="soberup.jpg" alt="playlist">
+          <div class="playlist-info-container">
+            <h3 class="playlist-heading">Playlist Title</h3>
+            <p class="playlist-description">Playlist Description</p>
+          </div>
+        </div>
+        <div class="playlist">
+          <img class="playlist-thumbnail" src="soberup.jpg" alt="playlist">
+          <div class="playlist-info-container">
+            <h3 class="playlist-heading">Playlist Title</h3>
+            <p class="playlist-description">Playlist Description</p>
+          </div>
+        </div>
+      </div>
+      <div class="playlist-player">
+        <div class="video-player">
+          <img class="video-player-img" src="soberup.jpg" alt="">
+        </div>
+        <div class="video-list-container">
+          <h1 class="section-title">Playlist Title</h1>
+        <div class="video-list">
+            <div class="video">
+              <img class="video-thumbnail" src="soberup.jpg" alt="playlist">
+              <div class="video-discription-container">
+                <p class="video-title">Video Title</p>
+                <p class="video-artist">Artist</p>
+              </div>
+              <p class="video-duration">Duration</p>
+            </div>
+            <div class="video">
+              <img class="video-thumbnail" src="soberup.jpg" alt="playlist">
+              <div class="video-discription-container">
+                <p class="video-title">Video Title</p>
+                <p class="video-artist">Artist</p>
+              </div>
+              <p class="video-duration">Duration</p>
+            </div>
+            <div class="video">
+              <img class="video-thumbnail" src="soberup.jpg" alt="playlist">
+              <div class="video-discription-container">
+                <p class="video-title">Video Title</p>
+                <p class="video-artist">Artist</p>
+              </div>
+              <p class="video-duration">Duration</p>
+            </div>
+        </div>
+      </div>
       </div>
     </div>
     <div id="settings-section" class="section">

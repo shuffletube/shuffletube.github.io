@@ -38,8 +38,10 @@ var GoogleAuth;
 
   function handleAuthClick() {
     if (GoogleAuth.isSignedIn.get()) {
-      // User is authorized and has clicked 'Sign out' button.
-      GoogleAuth.signOut();
+      if(confirm("Are you sure you want to sign out of ShuffleTube?")){
+        // User is authorized and has clicked 'Sign out' button.
+        GoogleAuth.signOut();
+      }
     } else {
       // User is not signed in. Start Google auth flow.
       GoogleAuth.signIn();
@@ -97,3 +99,7 @@ var GoogleAuth;
 // };
 // // 1. Load the JavaScript client library.
 // gapi.load('client', start);
+
+gapi.load('auth2', function() {
+  // Library loaded.
+});
