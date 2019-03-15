@@ -11,20 +11,44 @@ $(function(){
       $("#authorization-overlay").hide();
     }
   });
-  activeBackground();
+  //
+  activeBackground(true);
+  setTimeout(function(){activeBackground(true);},200);
+
+  let oldActiveAnchor;
   $("a.nav").click(function(){
-    $("a.nav.active").removeClass("active");
-    $(this).addClass("active");
-    activeBackground();
+    if(!$(this).is("a.nav.active")){
+      oldActiveAnchor = $("a.nav").eq($("a.nav.active").first().index());
+      $("a.nav.active").removeClass("active");
+      $(this).addClass("active");
+      activeBackground();
+    }
   });
-  function activeBackground(){
+  function activeBackground(init=false){
     let activeAnchor = $("a.nav.active").first();
-    $("#active-background").animate({top:activeAnchor.offset().top-$(window).scrollTop(), left:activeAnchor.offset().left-$(window).scrollLeft()},250);
+    if(init){
+      $("#active-background").offset({top:activeAnchor.offset().top-$(window).scrollTop(), left:activeAnchor.offset().left-$(window).scrollLeft()});
+    } else {
+      $("#active-background").animate({top:activeAnchor.offset().top-$(window).scrollTop(), left:activeAnchor.offset().left-$(window).scrollLeft()},250);
+    }
     $("#active-background").prependTo(activeAnchor);
     $("#active-background").width(activeAnchor.outerWidth());
     $("#active-background").height(activeAnchor.outerHeight());
-    $(".section").hide();
-    $(activeAnchor.attr("data-section")).show();
+    if(init){
+      $(".section").hide();
+      $(activeAnchor.attr("data-section")).show();
+    } else{
+      console.log(oldActiveAnchor);
+      $(oldActiveAnchor.attr("data-section")).hide(0,function(){
+          // alert("complete");
+          // $(oldActiveAnchor.attr("data-section")).hide();
+          // $(activeAnchor.attr("data-section")).show();
+          $(oldActiveAnchor.attr("data-section")).hide();
+          $(activeAnchor.attr("data-section")).show();
+          $(activeAnchor.attr("data-section")).removeClass("fadeInDown animated");
+          $(activeAnchor.attr("data-section")).addClass("fadeInDown animated");
+      });
+    }
   }
 });
 function onAuth(){

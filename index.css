@@ -1,8 +1,8 @@
 :root{
   --bg-color: rgb(40,40,40);
   --fg-color: rgb(60,60,60);
-  --fg-hov-color: rgb(50,50,50);
-  --fg-act-color: rgb(40,40,40);
+  --fg-hov-color: rgb(55,55,55);
+  --fg-act-color: rgb(50,50,50);
   --text-color: white;
   --text-hov-color: rgb(215,215,215);
   --text-act-color: rgb(175,175,175);
@@ -98,6 +98,7 @@ a.nav span{
   margin: 40px 5px;
   font-size: 26px;
   border: 0;
+  user-select: none;
 }
 #logoimg{
   width: 40px;
