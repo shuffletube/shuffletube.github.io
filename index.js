@@ -7,6 +7,5 @@ $(function(){
   // });
 });
  function onAuth(){
-   $("#authorization-overlay").hide();
 //   $("")
  }
