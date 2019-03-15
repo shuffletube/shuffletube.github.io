@@ -57,11 +57,10 @@ var GoogleAuth;
       $('#revoke-access-button').show();
       $('#authorization-overlay').hide();
       $("#execute-request-button").remove();
-      $('<button id="execute-request-button">Sign Out<i class="material-icons">lock</i></button>').appendTo("nav");
+      $('<a class="nav" id="execute-request-button">Sign Out<i class="material-icons">lock</i></a>').appendTo("nav");
       $('#execute-request-button').click(handleAuthClick);
       onAuth();
     } else {
-      alert("Signed Out");
       $("#authorization-overlay").show();
       $('#revoke-access-button').hide();
       $("#execute-request-button").remove();
