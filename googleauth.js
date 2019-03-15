@@ -65,6 +65,7 @@ var GoogleAuth;
       $('<a class="nav" id="execute-request-button">Sign Out</a>').appendTo("nav");
       onAuth();
     } else {
+      $("#authorization-overlay").show();
       $('#execute-request-button').text('Sign In');
       $('#revoke-access-button').hide();
       $('#auth-status').html('Please sign in to access ShuffleTube');
