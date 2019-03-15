@@ -6,7 +6,7 @@ $(function(){
   //   $("#nav-playlists").slideToggle();
   // });
 });
-// function onAuth(){
-//   $("#authorization-overlay").hide();
+ function onAuth(){
+   $("#authorization-overlay").hide();
 //   $("")
-// }
+ }
