@@ -322,6 +322,7 @@ input[type="text"]{
   height: 75px;
   margin-right: 10px;
   flex-shrink: 0;
+  border-radius: 5px;
 }
 .playlist-list .playlist-button{
   padding: 5px;
@@ -396,6 +397,7 @@ input[type="text"]{
 .video-thumbnail{
   max-height:37.5px;
   max-width:50px;
+  border-radius: 5px;
 }
 .video-discription-container{
   flex-grow:1;
