@@ -75,19 +75,3 @@ var GoogleAuth;
   function updateSigninStatus(isSignedIn) {
     setSigninStatus();
   }
-
-  function createPlaylist() {
-    var request = gapi.client.youtube.playlists.list({
-      part: "snippet",
-      mine: true,
-      maxResults: 50
-    });
-    request.execute(function(response) {
-      if(response.result){
-        $('#playlist-title').html(response.items.snippet.title);
-        $('#playlist-description').html(response.items.snippet.description);
-      } else {
-        console.error("failed to retrieve playlist data");
-      }
-    });
-  }

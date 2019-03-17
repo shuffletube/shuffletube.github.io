@@ -70,6 +70,49 @@ $(function(){
     }
   }
 });
+function createPlaylistHTML(target, title, description, imgURL){
+  if($(target).hasClass("playlist-list")){
+    $(target).append(`
+    <div class="playlist">
+      <img class="playlist-thumbnail" src="`+imgURL+`" alt="`+title+`">
+      <div class="playlist-info-container">
+        <h3 class="playlist-heading">`+title+`</h3>
+        <p class="playlist-description">`+description+`</p>
+      </div>
+      <button class="playlist-button"><i class="material-icons">file_copy</i></button>
+      <button class="playlist-button"><i class="material-icons">call_merge</i></button>
+      <button class="playlist-button"><i class="material-icons">call_split</i></button>
+      <button class="playlist-button"><i class="material-icons">delete_outline</i></button>
+    </div>`);
+  }else{
+    $(target).append(`
+    <div class="playlist">
+      <img class="playlist-thumbnail" src="`+imgURL+`" alt="`+title+`">
+      <div class="playlist-info-container">
+        <h3 class="playlist-heading">`+title+`</h3>
+        <p class="playlist-description">`+description+`</p>
+      </div>
+    </div>`);
+  }
+}
 function onAuth(){
-
+  const playlistListHTML = '';
+  $("#playlist-a").click(function(){
+    let request = gapi.client.youtube.playlists.list({
+      part: "snippet",
+      mine: true,
+      maxResults: 50
+    });
+    request.execute(function(response) {
+      if(response.result){
+        $("#manage-playlists-list").html();
+        response.result.items.forEach(function(i){
+          createPlaylistHTML("#manage-playlists-list", i.snippet.title, i.snippet.description, i.thumbnails.default.url);
+        });
+      } else {
+        console.error("failed to retrieve playlist data");
+      }
+    });
+  }
+  // $("a.nav.active").trigger("click");
 }
