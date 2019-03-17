@@ -113,6 +113,6 @@ function onAuth(){
         console.error("failed to retrieve playlist data");
       }
     });
-  }
+  });
   // $("a.nav.active").trigger("click");
 }
