@@ -3,6 +3,7 @@
   --fg-color: rgb(60,60,60);
   --fg-hov-color: rgb(55,55,55);
   --fg-act-color: rgb(50,50,50);
+  --scroll-track-color: rgb(45,45,45);
   --text-color: white;
   --text-hov-color: rgb(215,215,215);
   --text-act-color: rgb(175,175,175);
@@ -14,25 +15,44 @@
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background-color: var(--bg-color);
+  background-color: var(--scroll-track-color);
 }
 ::-webkit-scrollbar-thumb {
   background-color: var(--fg-color);
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--fg-hov-color);
 }
-/* ::-webkit-scrollbar-thumb:active {
+::-webkit-scrollbar-thumb:active {
   background-color: var(--fg-act-color);
-} */
+}
+::-webkit-scrollbar-button{
+  height: 10px;
+  width: 10px;
+  background-size: 100%;
+  background-color: var(--scroll-track-color);
+}
+::-webkit-scrollbar-button:vertical:increment {
+
+  background-image: url("baseline_expand_more_black_18dp.png");
+}
+::-webkit-scrollbar-button:vertical:decrement{
+  background-color: var(--scroll-track-color);
+  background-image: url("baseline_expand_less_black_18dp.png");
+}
 *{
   color: var(--text-color);
   font-family: 'Noto Sans', sans-serif;
+  user-select: none;
 }
 html,body{
   background-color: var(--bg-color);
   margin: 0;
   padding:0;
+}
+html{
+  overflow-y: scroll;
 }
 h1,h2,h3,h4,h5,h6{
   padding-bottom: 2px;
@@ -41,7 +61,7 @@ h1,h2,h3,h4,h5,h6{
 header{
   float: left;
   background-color: var(--fg-color);
-  position: sticky;
+  position: fixed;
   height: 100vh;
   z-index: 1;
   top:0;
@@ -56,7 +76,6 @@ a.nav{
   color: var(--text-color);
   padding: 10px;
   cursor: pointer;
-  user-select: none;
   text-decoration: none;
   font-size: 20px;
   box-sizing: border-box;
@@ -98,7 +117,6 @@ a.nav span{
   margin: 40px 5px;
   font-size: 26px;
   border: 0;
-  user-select: none;
 }
 #logoimg{
   width: 40px;
@@ -136,7 +154,6 @@ button{
   padding: 12px;
   font-size: 16px;
   cursor: pointer;
-  user-select: none;
   transition: background 0.25s;
 }
 button:hover{
@@ -165,6 +182,7 @@ button:active{
 }
 .section{
   padding: 20px;
+  min-height: 100%;
 }
 #create-section{
   text-align: center;
@@ -264,10 +282,10 @@ input[type="text"]{
   width: 100%;
   background-color: var(--fg-color);
   display: inline-flex;
+  align-items: center;
   padding: 10px;
   box-sizing: border-box;
   transition: background 0.25s;
-  user-select: none;
   cursor: pointer;
 }
 .playlist-list .playlist:not(:last-child){
@@ -282,18 +300,22 @@ input[type="text"]{
 }
 .playlist-list .playlist:hover{
   background-color: var(--fg-hov-color);
+  /* transform: scale(1.02); */
 }
 .playlist-list .playlist:active{
   background-color: var(--fg-act-color);
+  /* transform: scale(1.01); */
 }
 .playlist-list .playlist-info-container{
   flex-grow: 1;
 }
 .playlist-list .playlist-heading{
   margin: 0;
+  font-size: 24px;
 }
 .playlist-list .playlist-description{
   margin: 0;
+  font-size: 18px;
 }
 .playlist-list .playlist-thumbnail{
   width: 100px;
@@ -301,9 +323,33 @@ input[type="text"]{
   margin-right: 10px;
   flex-shrink: 0;
 }
+.playlist-list .playlist-button{
+  padding: 5px;
+  border-radius: 50px;
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  margin:0 0px;
+  /* background-color: var(--fg-hov-color); */
+}
+.playlist-list .playlist-button:hover{
+  background-color: var(--fg-color);
+}
+.playlist-list .playlist-button:active{
+  background-color: var(--link-color);
+}
 .playlist-list i.material-icons{
-  font-size: 40px;
+  font-size: 30px;
   flex-shrink:0;
+  color: var(--text-color);
+  transition: color 0.25s;
+}
+.playlist-list .playlist-button:hover i.material-icons{
+  /* color: var(--text-hov-color); */
+}
+.playlist-list .playlist-button:active i.material-icons{
+  /* color: var(--text-act-color); */
+  /* background-color: var(--fg-act-color); */
 }
 /*Video list Player list*/
 .playlist-player{
@@ -356,12 +402,11 @@ input[type="text"]{
   margin-left:20px;
 }
 .video-title{
-  margin:0;
   font-weight: bold;
 }
-.video-artist{
+.playlist-title,.video-artist,.video-duration,.video-title{
   margin: 0;
 }
-.video-duration{
-  margin:0;
+.section.animated{
+  position: absolute !important;
 }

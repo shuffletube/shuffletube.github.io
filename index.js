@@ -11,11 +11,16 @@ $(function(){
       $("#authorization-overlay").hide();
     }
   });
-  //
-  activeBackground(true);
-  setTimeout(function(){activeBackground(true);},200);
 
-  let oldActiveAnchor;
+  function initTimeout(){
+    activeBackground(true);
+    $("main").css("margin-left",$("header").width()+"px");
+  }
+
+  initTimeout();
+  setTimeout(initTimeout,500);
+
+  var oldActiveAnchor = 0;
   $("a.nav").click(function(){
     if(!$(this).is("a.nav.active")){
       oldActiveAnchor = $("a.nav").eq($("a.nav.active").first().index());
@@ -26,6 +31,8 @@ $(function(){
   });
   function activeBackground(init=false){
     let activeAnchor = $("a.nav.active").first();
+    let oldActiveSection = init?0:$(oldActiveAnchor.attr("data-section"));
+    let activeSection = $(activeAnchor.attr("data-section"));
     if(init){
       $("#active-background").offset({top:activeAnchor.offset().top-$(window).scrollTop(), left:activeAnchor.offset().left-$(window).scrollLeft()});
     } else {
@@ -36,17 +43,29 @@ $(function(){
     $("#active-background").height(activeAnchor.outerHeight());
     if(init){
       $(".section").hide();
-      $(activeAnchor.attr("data-section")).show();
+      activeSection.show();
     } else{
-      console.log(oldActiveAnchor);
-      $(oldActiveAnchor.attr("data-section")).hide(0,function(){
-          // alert("complete");
-          // $(oldActiveAnchor.attr("data-section")).hide();
-          // $(activeAnchor.attr("data-section")).show();
-          $(oldActiveAnchor.attr("data-section")).hide();
-          $(activeAnchor.attr("data-section")).show();
-          $(activeAnchor.attr("data-section")).removeClass("fadeInDown animated");
-          $(activeAnchor.attr("data-section")).addClass("fadeInDown animated");
+      // $("html,body").css("overflow","hidden");
+      activeSection.removeClass("fadeInUp fadeInDown fadeOutUp fadeOutDown animated active").show().css("width", activeSection.width());
+      oldActiveSection.removeClass("fadeInUp fadeInDown fadeOutUp fadeOutDown animated").show().css("width", oldActiveSection.width());
+      if(oldActiveAnchor.index() > activeAnchor.index()){
+        oldActiveSection.addClass("fadeOutDown");
+        activeSection.addClass("fadeInDown");
+      }else if(oldActiveAnchor.index() < activeAnchor.index()){
+        oldActiveSection.addClass("fadeOutUp");
+        activeSection.addClass("fadeInUp");
+      }
+      activeSection.addClass("animated");
+      oldActiveSection.addClass("animated");
+      console.log(oldActiveSection);
+      oldActiveSection.one("webkitAnimationEnd mozAnimationEnd msAnimationEnd oAnimationEnd animationEnd",function(){
+        $(this).removeClass("fadeInUp fadeInDown fadeOutUp fadeOutDown animated active").hide();
+        $(this).css("width","auto");
+      });
+      activeSection.one("webkitAnimationEnd mozAnimationEnd msAnimationEnd oAnimationEnd animationEnd",function(){
+        $(this).removeClass("fadeInUp fadeInDown fadeOutUp fadeOutDown animated").show();
+        // $("html,body").css("overflow","auto");
+        $(this).css("width","auto");
       });
     }
   }

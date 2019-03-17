@@ -58,14 +58,14 @@ var GoogleAuth;
     if (isAuthorized) {
       $('#revoke-access-button').show();
       $('#authorization-overlay').hide();
-      $("#execute-request-button").remove();
+      $("#execute-request-button").remove().off("click");
       $('<a class="nav" id="execute-request-button">Sign Out<i class="material-icons">lock</i></a>').appendTo("nav");
       $('#execute-request-button').click(handleAuthClick);
       onAuth();
     } else {
       $("#authorization-overlay").show();
       $('#revoke-access-button').hide();
-      $("#execute-request-button").remove();
+      $("#execute-request-button").remove().off("click");
       $('#auth-status').html('Please sign in to access ShuffleTube');
       $('<button id="execute-request-button">Sign In</button>').insertBefore("#revoke-access-button");
       $('#execute-request-button').click(handleAuthClick);
@@ -76,30 +76,18 @@ var GoogleAuth;
     setSigninStatus();
   }
 
-//   function start() {
-//   // 2. Initialize the JavaScript client library.
-//   gapi.client.init({
-//     'apiKey': 'AIzaSyAQTQGAOoPucSFjT2KKZkzd2Xs9s1W-Aq8',
-//     // Your API key will be automatically added to the Discovery Document URLs.
-//     'discoveryDocs': ['https://people.googleapis.com/$discovery/rest'],
-//     // clientId and scope are optional if auth is not required.
-//     'clientId': '964128075521-nm4satik39m8g82hucr9a7lbadici98e.apps.googleusercontent.com',
-//     'scope': 'profile',
-//   }).then(function() {
-//     // 3. Initialize and make the API request.
-//     return gapi.client.people.people.get({
-//       'resourceName': 'people/me',
-//       'requestMask.includeField': 'person.names'
-//     });
-//   }).then(function(response) {
-//     console.log(response.result);
-//   }, function(reason) {
-//     console.log('Error: ' + reason.result.error.message);
-//   });
-// };
-// // 1. Load the JavaScript client library.
-// gapi.load('client', start);
-
-gapi.load('auth2', function() {
-  // Library loaded.
-});
+  function createPlaylist() {
+    var request = gapi.client.youtube.playlists.list({
+      part: "snippet",
+      mine: true,
+      maxResults: 50
+    });
+    request.execute(function(response) {
+      if(response.result){
+        $('#playlist-title').html(response.items.snippet.title);
+        $('#playlist-description').html(response.items.snippet.description);
+      } else {
+        console.error("failed to retrieve playlist data");
+      }
+    });
+  }
