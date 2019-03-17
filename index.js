@@ -107,7 +107,7 @@ function onAuth(){
       if(response.result){
         $("#manage-playlists-list").html();
         response.result.items.forEach(function(i){
-          createPlaylistHTML("#manage-playlists-list", i.snippet.title, i.snippet.description, i.thumbnails.default.url);
+          createPlaylistHTML("#manage-playlists-list", i.snippet.title, i.snippet.description, i.snippet.thumbnails.default.url);
         });
       } else {
         console.error("failed to retrieve playlist data");
