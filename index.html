@@ -19,22 +19,22 @@
 <body>
   <header>
     <h2 id="navtitle">
-      ShuffleTube
+      <span class="min-screen-display">ShuffleTube</span>
       <img src="shuffletube.png" alt="icon" id="logoimg">
     </h2>
     <nav>
       <a id="dashboard-a" class="nav active" data-section="#dashboard-section">
-        <span>Home<i class="material-icons">home</i></span>
+        <span class="min-screen-display">Home</span><i class="material-icons">home</i>
       </a>
       <a id="create-a" class="nav" data-section="#create-section">
-        <span>Create<i class="material-icons">queue</i></span>
+        <span class="min-screen-display">Create</span><i class="material-icons">queue</i>
       </a>
       <a id="playlist-a" class="nav" data-section="#playlist-section">
-        <span>Playlists<i class="material-icons">queue_music</i></span>
+        <span class="min-screen-display">Playlists</span><i class="material-icons">queue_music</i>
       </a>
       <!-- <div id="nav-playlists"></div> -->
       <a id="settings-a" class="nav" data-section="#settings-section">
-        <span>Settings<i class="material-icons">settings</i></span>
+        <span class="min-screen-display">Settings</span><i class="material-icons">settings</i>
       </a>
       <div id="active-background"></div>
     </nav>
@@ -63,7 +63,7 @@
     </div>
     <div id="dashboard-section" class="section">
       <h1 class="section-title">Dashboard</h1>
-      <h2>Recently Played</h2>
+      <h2 class="bg-text">Recently Played</h2>
       <div class="playlist-container">
         <div class="playlist">
           <img src="soberup.jpg" alt="playlist" class="playlist-thumbnail">
@@ -84,7 +84,7 @@
     </div>
     <div id="create-section" class="section">
       <h1 class="section-title">Create Playlist</h1>
-      <p>Search for artists or songs you would like to add to your playlist</p>
+      <p class="bg-text">Search for artists or songs you would like to add to your playlist</p>
       <div class="search-component">
         <input type="text" placeholder="Search...">
         <button class="search">
@@ -104,7 +104,6 @@
           <!-- <button class="playlist-button"><i class="material-icons">playlist_play</i></button> -->
           <button class="playlist-button"><i class="material-icons">file_copy</i></button>
           <button class="playlist-button"><i class="material-icons">call_merge</i></button>
-          <button class="playlist-button"><i class="material-icons">call_split</i></button>
           <button class="playlist-button"><i class="material-icons">delete_outline</i></button>
 
         </div>
@@ -117,7 +116,6 @@
           <!-- <button class="playlist-button"><i class="material-icons">playlist_play</i></button> -->
           <button class="playlist-button"><i class="material-icons">file_copy</i></button>
           <button class="playlist-button"><i class="material-icons">call_merge</i></button>
-          <button class="playlist-button"><i class="material-icons">call_split</i></button>
           <button class="playlist-button"><i class="material-icons">delete_outline</i></button>
         </div>
         <div class="playlist">
@@ -129,7 +127,6 @@
           <!-- <button class="playlist-button"><i class="material-icons">playlist_play</i></button> -->
           <button class="playlist-button"><i class="material-icons">file_copy</i></button>
           <button class="playlist-button"><i class="material-icons">call_merge</i></button>
-          <button class="playlist-button"><i class="material-icons">call_split</i></button>
           <button class="playlist-button"><i class="material-icons">delete_outline</i></button>
         </div>
       </div>
@@ -138,8 +135,8 @@
           <img class="video-player-img" src="soberup.jpg" alt="">
         </div>
         <div class="video-list-container">
-          <h1 class="playlist-title">Playlist Title</h1>
-          <h2 class="video-title">Playing: Video Title</h2>
+          <h1 class="playlist-title bg-text">Playlist Title</h1>
+          <h2 class="video-title bg-text">Playing: Video Title</h2>
         <div class="video-list">
             <div class="video">
               <img class="video-thumbnail" src="soberup.jpg" alt="playlist">
@@ -179,6 +176,20 @@
     </div>
     <div id="settings-section" class="section">
       <h1 class="section-title">Settings</h1>
+      <div class="settings-container">
+        <h2>Color Theme</h2>
+        <div id="color-theme-button-container" class="toggle-options">
+          <button id="dark-theme-button" class="active">Dark</button>
+          <button id="light-theme-button">Light</button>
+        </div>
+        <div id="settings-revoke-access">
+          <h2>Revoke Access</h2>
+          <p>Clicking the button below will take away access to your YouTube account and will sign you out.</p>
+        </div>
+        <h2>Enable Offline Download</h2>
+        <p>WARNING: Downloading any YouTube Content is against <a href="https://www.youtube.com/static?template=terms" target="_blank">YouTube's terms of service</a>. ShuffleTube is not responsible for downloading this content.</p>
+        <input type="checkbox">
+      </div>
     </div>
   </main>
 </body>

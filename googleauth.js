@@ -59,7 +59,8 @@ var GoogleAuth;
       $('#revoke-access-button').show();
       $('#authorization-overlay').hide();
       $("#execute-request-button").remove().off("click");
-      $('<a class="nav" id="execute-request-button">Sign Out<i class="material-icons">lock</i></a>').appendTo("nav");
+      $('<a class="nav" id="execute-request-button"><span class="min-screen-display">Sign Out</span><i class="material-icons">lock</i></a>').appendTo("nav");
+      $("#settings-revoke-access").append($("#revoke-access-button").prop("outerHTML"));
       $('#execute-request-button').click(handleAuthClick);
       onAuth();
     } else {

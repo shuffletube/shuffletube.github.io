@@ -1,34 +1,36 @@
 $(function(){
-  $("main").css("margin-left",$("header").width()+"px");
-  // $("#nav-playlists").hide();
-  // $("#playlist-a").click(function(){
-  //   $("#playlist-a > i").toggleClass("active");
-  //   $("#nav-playlists").slideToggle();
-  // });
-  // $("#authorization-overlay").hide();
+
+  //Authentication Skip Shortcut
   $(document).keydown(function(e){
     if(e.which == 27){
       $("#authorization-overlay").hide();
     }
   });
 
+  //
   function initTimeout(){
     activeBackground(true);
     $("main").css("margin-left",$("header").width()+"px");
   }
 
+  //Run after fonts/icons are done loading
   initTimeout();
   setTimeout(initTimeout,500);
-
+  $(window).resize(function(){
+    initTimeout();
+  });
+  //Switch Active Sections
   var oldActiveAnchor = 0;
   $("a.nav").click(function(){
     if(!$(this).is("a.nav.active")){
       oldActiveAnchor = $("a.nav").eq($("a.nav.active").first().index());
       $("a.nav.active").removeClass("active");
       $(this).addClass("active");
+      $("html, body").animate({scrollTop:0}, "slow");
       activeBackground();
     }
   });
+  //Animates anchor background and switch between sections
   function activeBackground(init=false){
     let activeAnchor = $("a.nav.active").first();
     let oldActiveSection = init?0:$(oldActiveAnchor.attr("data-section"));
@@ -69,7 +71,25 @@ $(function(){
       });
     }
   }
+
+  //Toggle Dark Theme On and Off
+  $("#dark-theme-button").click(function(){
+    $("#color-theme-button-container button.active").removeClass("active");
+    $(this).addClass("active");
+    if($("#light-theme-stylesheet").length){
+      $("#light-theme-stylesheet").remove();
+    }
+  });
+  $("#light-theme-button").click(function(){
+    if($("#light-theme-stylesheet").length < 1){
+      $("#color-theme-button-container button.active").removeClass("active");
+      $(this).addClass("active");
+      $("#light-theme-stylesheet").remove();
+      $('<link rel="stylesheet" href="light-theme.css" id="light-theme-stylesheet">').appendTo("head");
+    }
+  });
 });
+//Inserts HTML for playlist
 function createPlaylistHTML(target, title, description, imgURL){
   if($(target).hasClass("playlist-list")){
     $(target).append(`
@@ -81,7 +101,6 @@ function createPlaylistHTML(target, title, description, imgURL){
       </div>
       <button class="playlist-button"><i class="material-icons">file_copy</i></button>
       <button class="playlist-button"><i class="material-icons">call_merge</i></button>
-      <button class="playlist-button"><i class="material-icons">call_split</i></button>
       <button class="playlist-button"><i class="material-icons">delete_outline</i></button>
     </div>`);
   }else{
@@ -95,9 +114,11 @@ function createPlaylistHTML(target, title, description, imgURL){
     </div>`);
   }
 }
+//Executes when user is logged in
 function onAuth(){
+  //Display Playlists List
   const playlistListHTML = '';
-  $("#playlist-a").click(function(){
+  $("#playlist-a").one("click",function(){
     let request = gapi.client.youtube.playlists.list({
       part: "snippet",
       mine: true,
