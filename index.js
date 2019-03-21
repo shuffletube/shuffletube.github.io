@@ -149,20 +149,22 @@ function onAuth(){
       }
     });
   });
-  $(".playlist").one("click",function(){
-    let $this = $(this);
-    let requestVideo = gapi.client.youtube.playlistItems.list({
-      part: "snippet",
-      playlistId: $this.attr("data-playlist-id"),
-      maxResults: 50
-    });
-    requestVideo.execute(function(response) {
-      if(response.result){
-        $("#video-list-container .loading").remove();
-        createVideoListHTML("#video-list-container", response.result.items);
-      } else {
-        console.error("failed to retrieve playlist video data");
-      }
+  $("#manage-playlists-list .playlist").each(function(){
+    $(this).click(function(){
+      let $this = $(this);
+      let requestVideo = gapi.client.youtube.playlistItems.list({
+        part: "snippet",
+        playlistId: $this.attr("data-playlist-id"),
+        maxResults: 50
+      });
+      requestVideo.execute(function(response) {
+        if(response.result){
+          $("#video-list-container .loading").remove();
+          createVideoListHTML("#video-list-container", response.result.items);
+        } else {
+          console.error("failed to retrieve playlist video data");
+        }
+      });
     });
   });
 
