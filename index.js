@@ -144,10 +144,28 @@ function onAuth(){
       if(response.result){
         $("#manage-playlists-list .loading").remove();
         createPlaylistHTML("#manage-playlists-list", response.result.items);
+        //Load videos
+        $("#manage-playlists-list .playlist").each(function(){
+          $(this).click(function(){
+            let $this = $(this);
+            let requestVideo = gapi.client.youtube.playlistItems.list({
+              part: "snippet",
+              playlistId: $this.attr("data-playlist-id"),
+              maxResults: 50
+            });
+            requestVideo.execute(function(response) {
+              if(response.result){
+                $("#video-list-container .loading").remove();
+                createVideoListHTML("#video-list-container", response.result.items);
+              } else {
+                console.error("failed to retrieve playlist video data");
+              }
+            });
+          });
+        });
       } else {
         console.error("failed to retrieve playlist data");
       }
     });
   });
-
 }
