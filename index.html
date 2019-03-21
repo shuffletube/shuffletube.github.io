@@ -9,7 +9,8 @@
   <link rel="stylesheet" type="text/css" href="animate.css">
   <link rel="stylesheet" type="text/css" href="index.css">
   <!-- <link rel="stylesheet" href="https://google-developers.appspot.com/_static/7bb14d2951/css/devsite-cyan.css"> -->
-  <link rel="icon" href="shuffletube.png">
+  <link rel="icon" href="shuffletube3.png">
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://apis.google.com/js/api.js"></script>
   <script type="text/javascript" src="index.js"></script>
@@ -20,7 +21,7 @@
   <header>
     <h2 id="navtitle">
       <span class="min-screen-display">ShuffleTube</span>
-      <img src="shuffletube.png" alt="icon" id="logoimg">
+      <img src="shuffletube3.png" alt="icon" id="logoimg">
     </h2>
     <nav>
       <a id="dashboard-a" class="nav active" data-section="#dashboard-section">
@@ -65,20 +66,10 @@
       <h1 class="section-title">Dashboard</h1>
       <h2 class="bg-text">Recently Played</h2>
       <div class="playlist-container">
-        <div class="playlist">
-          <img src="soberup.jpg" alt="playlist" class="playlist-thumbnail">
-          <h3 class="playlist-heading">Playlist Title</h3>
-          <p class="playlist-description">Playlist Description</p>
-        </div>
-        <div class="playlist">
-          <img src="soberup.jpg" alt="playlist" class="playlist-thumbnail">
-          <h3 class="playlist-heading">Playlist Title</h3>
-          <p class="playlist-description">Playlist Description</p>
-        </div>
-        <div class="playlist">
-          <img src="soberup.jpg" alt="playlist" class="playlist-thumbnail">
-          <h3 class="playlist-heading">Playlist Title</h3>
-          <p class="playlist-description">Playlist Description</p>
+        <div class="playlist loading">
+          <img src="shuffletubeloading.png" alt="playlist" class="playlist-thumbnail">
+          <h3 class="playlist-heading">Loading...</h3>
+          <p class="playlist-description">Loading...</p>
         </div>
       </div>
     </div>
@@ -96,33 +87,10 @@
       <h1 class="section-title">Manage Playlists</h1>
       <div id="manage-playlists-list" class="playlist-list">
         <div class="playlist">
-          <img class="playlist-thumbnail" src="soberup.jpg" alt="playlist">
+          <img class="playlist-thumbnail" src="shuffletubeloading.png" alt="playlist">
           <div class="playlist-info-container">
-            <h3 class="playlist-heading">Playlist Title</h3>
-            <p class="playlist-description">Playlist Description</p>
-          </div>
-          <!-- <button class="playlist-button"><i class="material-icons">playlist_play</i></button> -->
-          <button class="playlist-button"><i class="material-icons">file_copy</i></button>
-          <button class="playlist-button"><i class="material-icons">call_merge</i></button>
-          <button class="playlist-button"><i class="material-icons">delete_outline</i></button>
-
-        </div>
-        <div class="playlist">
-          <img class="playlist-thumbnail" src="soberup.jpg" alt="playlist">
-          <div class="playlist-info-container">
-            <h3 class="playlist-heading">Playlist Title</h3>
-            <p class="playlist-description">Playlist Description</p>
-          </div>
-          <!-- <button class="playlist-button"><i class="material-icons">playlist_play</i></button> -->
-          <button class="playlist-button"><i class="material-icons">file_copy</i></button>
-          <button class="playlist-button"><i class="material-icons">call_merge</i></button>
-          <button class="playlist-button"><i class="material-icons">delete_outline</i></button>
-        </div>
-        <div class="playlist">
-          <img class="playlist-thumbnail" src="soberup.jpg" alt="playlist">
-          <div class="playlist-info-container">
-            <h3 class="playlist-heading">Playlist Title</h3>
-            <p class="playlist-description">Playlist Description</p>
+            <h3 class="playlist-heading">Loading...</h3>
+            <p class="playlist-description">Loading...</p>
           </div>
           <!-- <button class="playlist-button"><i class="material-icons">playlist_play</i></button> -->
           <button class="playlist-button"><i class="material-icons">file_copy</i></button>
@@ -132,46 +100,23 @@
       </div>
       <div class="playlist-player">
         <div class="video-player">
-          <img class="video-player-img" src="soberup.jpg" alt="">
+          <div id="player"></div>
+          <img class="video-player-img" src="shuffletubeloading.png" alt="">
         </div>
-        <div class="video-list-container">
-          <h1 class="playlist-title bg-text">Playlist Title</h1>
-          <h2 class="video-title bg-text">Playing: Video Title</h2>
-        <div class="video-list">
-            <div class="video">
-              <img class="video-thumbnail" src="soberup.jpg" alt="playlist">
-              <div class="video-discription-container">
-                <p class="video-title">Video Title</p>
-                <p class="video-artist">Artist</p>
+        <div id="video-list-container">
+          <h1 class="playlist-title bg-text">Loading...</h1>
+          <h2 class="video-title bg-text">Loading...</h2>
+          <div class="video-list">
+              <div class="video">
+                <img class="video-thumbnail" src="shuffletubeloading.png" alt="playlist">
+                <div class="video-discription-container">
+                  <h3 class="video-title">Loading...</h3>
+                  <p class="video-artist">Loading...</p>
+                </div>
+                <p class="video-duration">Loading...</p>
               </div>
-              <p class="video-duration">Duration</p>
-            </div>
-            <div class="video">
-              <img class="video-thumbnail" src="soberup.jpg" alt="playlist">
-              <div class="video-discription-container">
-                <p class="video-title">Video Title</p>
-                <p class="video-artist">Artist</p>
-              </div>
-              <p class="video-duration">Duration</p>
-            </div>
-            <div class="video">
-              <img class="video-thumbnail" src="soberup.jpg" alt="playlist">
-              <div class="video-discription-container">
-                <p class="video-title">Video Title</p>
-                <p class="video-artist">Artist</p>
-              </div>
-              <p class="video-duration">Duration</p>
-            </div>
-            <div class="video">
-              <img class="video-thumbnail" src="soberup.jpg" alt="playlist">
-              <div class="video-discription-container">
-                <p class="video-title">Video Title</p>
-                <p class="video-artist">Artist</p>
-              </div>
-              <p class="video-duration">Duration</p>
-            </div>
+          </div>
         </div>
-      </div>
       </div>
     </div>
     <div id="settings-section" class="section">
@@ -181,14 +126,19 @@
         <div id="color-theme-button-container" class="toggle-options">
           <button id="dark-theme-button" class="active">Dark</button>
           <button id="light-theme-button">Light</button>
+          <button>Custom</button>
         </div>
         <div id="settings-revoke-access">
           <h2>Revoke Access</h2>
           <p>Clicking the button below will take away access to your YouTube account and will sign you out.</p>
         </div>
         <h2>Enable Offline Download</h2>
-        <p>WARNING: Downloading any YouTube Content is against <a href="https://www.youtube.com/static?template=terms" target="_blank">YouTube's terms of service</a>. ShuffleTube is not responsible for downloading this content.</p>
-        <input type="checkbox">
+        <p>WARNING: Downloading any YouTube Content is against <a href="https://www.youtube.com/static?template=terms" target="_blank">YouTube's terms of service</a>. ShuffleTube is not responsible for downloading any of YouTube's Content.</p>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+        <button>Reset All</button>
       </div>
     </div>
   </main>

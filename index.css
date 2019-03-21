@@ -47,6 +47,7 @@
   color: var(--text-color);
   font-family: 'Noto Sans', sans-serif;
   user-select: none;
+  transition: .25s;
 }
 html,body{
   background-color: var(--bg-color);
@@ -81,7 +82,7 @@ a.nav{
   text-decoration: none;
   font-size: 20px;
   box-sizing: border-box;
-  transition: background 0.25s;
+  /* transition: background 0.25s; */
 }
 a.nav:hover{
   background-color: var(--fg-hov-color);
@@ -112,6 +113,7 @@ a.nav span{
   background-color: var(--link-color);
   color: var(--link-text-color);
   position: absolute;
+  transition: ease-out 0.25s;
   /* z-index: 0; */
 }
 #nav-playlists{
@@ -149,7 +151,7 @@ a.nav i.material-icons{
   z-index: 3;
 }
 i.material-icons.arrow{
-  transition: transform 0.5s;
+  /* transition: transform 0.5s; */
 }
 i.material-icons.arrow.active{
   transform: rotate(-180deg);
@@ -162,7 +164,7 @@ button{
   padding: 12px;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.25s, color 0.25s;
+  /* transition: background 0.25s, color 0.25s; */
 }
 button:hover{
   background-color: var(--link-hov-color);
@@ -237,7 +239,7 @@ input[type="text"]{
   flex-grow: 0;
   background-color: var(--fg-color);
   border-radius:0 50px 50px 0;
-  transition: background 0.25s;
+  /* transition: background 0.25s; */
 }
 .search-component button.search i.material-icons{
   font-size: 22px;
@@ -269,7 +271,7 @@ input[type="text"]{
   display: inline-block;
   padding: 10px;
   cursor: pointer;
-  transition: transform 0.25s;
+  /* transition: transform 0.25s; */
   margin: 10px;
 }
 .playlist-container .playlist:hover{
@@ -301,18 +303,21 @@ input[type="text"]{
   align-items: center;
   padding: 10px;
   box-sizing: border-box;
-  transition: background 0.25s;
+  /* transition: background 0.25s; */
   cursor: pointer;
+  border-radius: 0;
 }
 .playlist-list .playlist:not(:last-child){
   /* border-bottom: 1px solid var(--text-color); */
 
 }
 .playlist-list .playlist:first-child{
-  border-radius: 5px 5px 0 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .playlist-list .playlist:last-child{
-  border-radius: 0 0 5px 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .playlist-list .playlist:hover{
   background-color: var(--fg-hov-color);
@@ -338,7 +343,7 @@ input[type="text"]{
   height: 75px;
   margin-right: 10px;
   flex-shrink: 0;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 .playlist-list .playlist-button{
   padding: 5px;
@@ -362,7 +367,7 @@ input[type="text"]{
   font-size: 30px;
   flex-shrink:0;
   color: var(--text-color);
-  transition: color 0.25s;
+  /* transition: color 0.25s; */
 }
 .playlist-list .playlist-button:hover i.material-icons{
   /* color: var(--text-hov-color); */
@@ -381,20 +386,23 @@ input[type="text"]{
 .video-player-img{
   width: 100%;
 }
-.video-list-container{
+#video-list-container{
   width: 50%;
   margin: 10px;
 }
 .video-list{
+  border-radius: 0;
 }
 .video-container{
   border-radius: 5px;
 }
 .video-list .video:first-child{
-  border-radius: 5px 5px 0 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .video-list .video:last-child{
-  border-radius: 0 0 5px 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .video:hover{
   background-color: var(--fg-hov-color);
@@ -410,13 +418,13 @@ input[type="text"]{
   background-color: var(--fg-color);
   padding: 10px;
   box-sizing: border-box;
-  transition: background 0.25s;
+  /* transition: background 0.25s; */
   cursor:pointer;
 }
 .video-thumbnail{
-  max-height:37.5px;
-  max-width:50px;
-  border-radius: 5px;
+  height:37.5px;
+  width:50px;
+  border-radius: 2px;
 }
 .video-discription-container{
   flex-grow:1;
@@ -442,16 +450,19 @@ input[type="text"]{
 /*Style Specific*/
 .toggle-options button{
   padding: 12px;
-  transition: background 0.25s;
+  /* transition: background 0.25s; */
+  border-radius:0;
 }
 .toggle-options button:first-child{
-  border-radius: 50px 0 0 50px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
 }
 .toggle-options button:not(:last-child){
   margin-right: -4px;
 }
 .toggle-options button:last-child{
-  border-radius: 0 50px 50px 0;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 .toggle-options button.active{
   font-weight: bold;
@@ -474,6 +485,47 @@ input[type="text"]{
 #light-theme-button:active, #dark-theme-button:active{
   background-color: var(--link-color);
   color: white;
+}
+/*Slider Input Switch*/
+.switch {
+  position: relative;
+  display: block;
+  width: 55px;
+  height: 30px;
+  margin: 10px 0;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--fg-act-color);
+  transition: .25s;
+  border-radius: 30px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .25s;
+}
+input:checked + .slider {
+  background-color: var(--link-color);
+}
+input:checked + .slider:before {
+  transform: translateX(24px);
 }
 /*Smaller Screen Compatibility*/
 @media only screen and (max-width: 1000px) {

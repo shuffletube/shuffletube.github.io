@@ -60,12 +60,15 @@ var GoogleAuth;
       $('#authorization-overlay').hide();
       $("#execute-request-button").remove().off("click");
       $('<a class="nav" id="execute-request-button"><span class="min-screen-display">Sign Out</span><i class="material-icons">lock</i></a>').appendTo("nav");
-      $("#settings-revoke-access").append($("#revoke-access-button").prop("outerHTML"));
+      $("#settings-revoke-access").append("#revoke-access-button");
+      $("#revoke-access-button").click(revokeAccess);
       $('#execute-request-button').click(handleAuthClick);
       onAuth();
     } else {
       $("#authorization-overlay").show();
       $('#revoke-access-button').hide();
+      $("#revoke-access-button").insertBefore("#auth-status");
+      $("#revoke-access-button").click(revokeAccess);
       $("#execute-request-button").remove().off("click");
       $('#auth-status').html('Please sign in to access ShuffleTube');
       $('<button id="execute-request-button">Sign In</button>').insertBefore("#revoke-access-button");
