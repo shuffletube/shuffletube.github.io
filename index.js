@@ -149,9 +149,10 @@ function onAuth(){
     });
   });
   $(".playlist").one("click",function(){
+    let $this = $(this);
     let requestVideo = gapi.client.youtube.playlistItems.list({
       part: "snippet",
-      playlistId: $(this).attr("data-playlist-id"),
+      playlistId: $this.attr("data-playlist-id"),
       maxResults: 50
     });
     requestVideo.execute(function(response) {
