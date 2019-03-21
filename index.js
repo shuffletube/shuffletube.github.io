@@ -143,7 +143,7 @@ function onAuth(){
     request.execute(function(response) {
       if(response.result){
         $("#manage-playlists-list .loading").remove();
-        createPlaylistHTML("#manage-playlists-list", response.result);
+        createPlaylistHTML("#manage-playlists-list", response.result.items);
       } else {
         console.error("failed to retrieve playlist data");
       }
