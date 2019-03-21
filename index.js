@@ -90,8 +90,8 @@ $(function(){
   });
 });
 //Inserts HTML for playlist
-function createPlaylistHTML(target, playlistIt){
-  playlistIt.forEach(function(i){
+function createPlaylistHTML(target, playlistItems){
+  playlistItems.forEach(function(i){
     if($(target).hasClass("playlist-list")){
       $(target).append(`
       <div class="playlist" data-playlist-id="`+i.id+`">
