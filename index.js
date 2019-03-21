@@ -126,7 +126,7 @@ function createVideoListHTML(target, videoList){
         <h3 class="video-title">`+i.snippet.title+`</h3>
         <p class="video-artist">`+i.snippet.channelTitle+`</p>
       </div>
-      <p class="video-duration">`+i.contentDetails.endAt+`</p>
+      <p class="video-duration"></p>
     </div>`);
   });
 }
