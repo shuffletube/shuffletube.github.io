@@ -151,6 +151,7 @@ function onAuth(){
   });
   $("#manage-playlists-list .playlist").each(function(){
     $(this).click(function(){
+      console.log("click mf");
       let $this = $(this);
       let requestVideo = gapi.client.youtube.playlistItems.list({
         part: "snippet",
