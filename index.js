@@ -91,6 +91,7 @@ $(function(){
 });
 //Inserts HTML for playlist
 function createPlaylistHTML(target, playlistItems){
+  console.log(playlistItems);
   playlistItems.forEach(function(i){
     if($(target).hasClass("playlist-list")){
       $(target).append(`
