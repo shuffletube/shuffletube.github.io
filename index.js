@@ -140,6 +140,28 @@ function createVideoListHTML(target, videoList){
     </div>`);
   });
 }
+var videoIndex = 0;
+var player;
+function nextVideoInPlaylist(response){
+  if($("#loading-video").is("img")){
+    player = new YT.Player('loading-video', {
+      height: '390',
+      width: '640',
+      videoId: shuffledItems[videoIndex].snippet.resourceId.videoId,
+      events: {
+        'onReady': function(e){e.target.playVideo();},
+        'onStateChange': function(e){
+          if(e.data == YT.PlayerState.ENDED){
+            videoIndex++;
+            nextVideoInPlaylist(response)
+          }
+        }
+      }
+    });
+  } else {
+    player.loadVideoById(shuffledItems[videoIndex].snippet.resourceId.videoId, 0);
+  }
+}
 //Executes when user is logged in
 function onAuth(){
   //Display Playlists List
@@ -166,17 +188,14 @@ function onAuth(){
             requestVideo.execute(function(response) {
               if(response.result){
                 $("#video-list-container").empty();
-                createVideoListHTML("#video-list-container", response.result.items);
-                $("#video-list-container").find(".video-thumbnail").remove();
-                var player = new YT.Player('loading-video', {
-                  height: '390',
-                  width: '640',
-                  videoId: response.result.items[0].snippet.resourceId.videoId,
-                  events: {
-                    'onReady': function(e){e.target.playVideo();},
-                    'onStateChange': function(){}
-                  }
-                });
+                // $("#video-list-container").find(".video-thumbnail").remove();
+                let shuffledItems = response.result.items.slice(0);
+                for (i = shuffledItems.length - 1; i > 0; i--) {
+                  let j = Math.floor(Math.random() * (i + 1));
+                  [shuffledItems[i], shuffledItems[j]] = [shuffledItems[j], shuffledItems[i]];
+                }
+                createVideoListHTML("#video-list-container", shuffledItems);
+                nextVideoInPlaylist(response);
 
               } else {
                 console.error("failed to retrieve playlist video data");
