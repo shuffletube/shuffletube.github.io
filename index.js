@@ -142,7 +142,7 @@ function createVideoListHTML(target, videoList){
 }
 var videoIndex = 0;
 var player;
-function nextVideoInPlaylist(response){
+function nextVideoInPlaylist(response, shuffledItems){
   if($("#loading-video").is("img")){
     player = new YT.Player('loading-video', {
       height: '390',
@@ -153,7 +153,7 @@ function nextVideoInPlaylist(response){
         'onStateChange': function(e){
           if(e.data == YT.PlayerState.ENDED){
             videoIndex++;
-            nextVideoInPlaylist(response)
+            nextVideoInPlaylist(response, shuffledItems);
           }
         }
       }
@@ -195,7 +195,7 @@ function onAuth(){
                   [shuffledItems[i], shuffledItems[j]] = [shuffledItems[j], shuffledItems[i]];
                 }
                 createVideoListHTML("#video-list-container", shuffledItems);
-                nextVideoInPlaylist(response);
+                nextVideoInPlaylist(response, shuffledItems);
 
               } else {
                 console.error("failed to retrieve playlist video data");
