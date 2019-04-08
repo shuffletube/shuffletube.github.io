@@ -1,5 +1,10 @@
 $(function(){
 
+  //Import Saved Theme
+  if(localStorage.theme == "light"){
+    lightTheme();
+  }
+
   //Authentication Skip Shortcut
   $(document).keydown(function(e){
     if(e.which == 27){
@@ -7,7 +12,7 @@ $(function(){
     }
   });
 
-  //
+  //Margin Offset Nav
   function initTimeout(){
     activeBackground(true);
     $("main").css("margin-left",$("header").width()+"px");
@@ -73,21 +78,26 @@ $(function(){
   }
 
   //Toggle Dark Theme On and Off
-  $("#dark-theme-button").click(function(){
+  $("#dark-theme-button").click(darkTheme);
+  $("#light-theme-button").click(lightTheme);
+
+  function darkTheme(){
+    localStorage.theme = "dark";
     $("#color-theme-button-container button.active").removeClass("active");
-    $(this).addClass("active");
+    $("#dark-theme-button").addClass("active");
     if($("#light-theme-stylesheet").length){
       $("#light-theme-stylesheet").remove();
     }
-  });
-  $("#light-theme-button").click(function(){
+  }
+  function lightTheme(){
+    localStorage.theme = "light";
     if($("#light-theme-stylesheet").length < 1){
       $("#color-theme-button-container button.active").removeClass("active");
-      $(this).addClass("active");
+      $("#light-theme-button").addClass("active");
       $("#light-theme-stylesheet").remove();
       $('<link rel="stylesheet" href="light-theme.css" id="light-theme-stylesheet">').appendTo("head");
     }
-  });
+  }
 });
 //Inserts HTML for playlist
 function createPlaylistHTML(target, playlistItems){
@@ -124,7 +134,7 @@ function createVideoListHTML(target, videoList){
       <img class="video-thumbnail" src="`+i.snippet.thumbnails.default.url+`" alt="playlist">
       <div class="video-discription-container">
         <h3 class="video-title">`+i.snippet.title+`</h3>
-        <p class="video-artist">`+i.snippet.channelTitle+`</p>
+        <!--<p class="video-artist"></p>-->
       </div>
       <p class="video-duration"></p>
     </div>`);
@@ -142,7 +152,7 @@ function onAuth(){
     });
     request.execute(function(response) {
       if(response.result){
-        $("#manage-playlists-list .loading").remove();
+        $("#video-list-container").empty();
         createPlaylistHTML("#manage-playlists-list", response.result.items);
         //Load videos
         $("#manage-playlists-list .playlist").each(function(){
@@ -155,8 +165,19 @@ function onAuth(){
             });
             requestVideo.execute(function(response) {
               if(response.result){
-                $("#video-list-container .loading").remove();
+                $("#video-list-container").empty();
                 createVideoListHTML("#video-list-container", response.result.items);
+                $("#video-list-container").find(".video-thumbnail").remove();
+                player = new YT.Player('loading-video', {
+                  height: '390',
+                  width: '640',
+                  videoId: response.result.items[0].snippet.resourceId.videoId,
+                  events: {
+                    'onReady': function(e){e.target.playVideo();},
+                    'onStateChange': function(){}
+                  }
+                });
+
               } else {
                 console.error("failed to retrieve playlist video data");
               }

@@ -4,7 +4,7 @@
   --fg-color: rgb(60,60,60);
   --fg-hov-color: rgb(55,55,55);
   --fg-act-color: rgb(50,50,50);
-  --fg-dark-color: rgb(45,45,45);/*Scroll Color*/
+  --fg-dark-color: rgb(20,20,20);/*Scroll Color*/
   --text-color: white;
   --text-hov-color: rgb(215,215,215);
   --text-act-color: rgb(175,175,175);
@@ -183,9 +183,13 @@ button:active{
   padding: 16px;
   width: 50%;
   max-width: 100%;
+  overflow-y: visible;
 }
 #auth-status{
   display: inline;
+}
+main{
+  transition: none;
 }
 .m0{
   margin: 0;
@@ -431,7 +435,7 @@ input[type="text"]{
   margin-left:20px;
 }
 .video-title{
-  font-weight: bold;
+  font-size: 35px;
 }
 .playlist-title,.video-artist,.video-duration,.video-title{
   margin: 0;
@@ -538,5 +542,17 @@ input:checked + .slider:before {
   a.nav i.material-icons{
     float: none;
     position: relative;
+  }
+  #authorization-modal{
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    box-sizing: border-box;
+    top:0;
+    left:0;
+    margin: 10px;
+    transform:none;
+  }
+  input[type="text"]{
+    width:calc(100% - 85px);
   }
 }

@@ -10,7 +10,7 @@
   <link rel="stylesheet" type="text/css" href="index.css">
   <!-- <link rel="stylesheet" href="https://google-developers.appspot.com/_static/7bb14d2951/css/devsite-cyan.css"> -->
   <link rel="icon" href="shuffletube3.png">
-  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://www.youtube.com/iframe_api" async></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://apis.google.com/js/api.js"></script>
   <script type="text/javascript" src="index.js"></script>
@@ -107,8 +107,8 @@
           <h1 class="playlist-title bg-text">Loading...</h1>
           <h2 class="video-title bg-text">Loading...</h2>
           <div class="video-list">
-              <div class="video">
-                <img class="video-thumbnail" src="shuffletubeloading.png" alt="playlist">
+              <div class="video loading">
+                <img id="loading-video" class="video-thumbnail" src="shuffletubeloading.png" alt="playlist">
                 <div class="video-discription-container">
                   <h3 class="video-title">Loading...</h3>
                   <p class="video-artist">Loading...</p>
