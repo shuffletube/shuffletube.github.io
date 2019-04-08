@@ -168,7 +168,7 @@ function onAuth(){
                 $("#video-list-container").empty();
                 createVideoListHTML("#video-list-container", response.result.items);
                 $("#video-list-container").find(".video-thumbnail").remove();
-                player = new YT.Player('loading-video', {
+                var player = new YT.Player('loading-video', {
                   height: '390',
                   width: '640',
                   videoId: response.result.items[0].snippet.resourceId.videoId,
