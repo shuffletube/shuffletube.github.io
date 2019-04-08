@@ -425,6 +425,14 @@ input[type="text"]{
   /* transition: background 0.25s; */
   cursor:pointer;
 }
+.video:first-child{
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.video:last-child{
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
 .video-thumbnail{
   height:37.5px;
   width:50px;
@@ -435,7 +443,7 @@ input[type="text"]{
   margin-left:20px;
 }
 .video-title{
-  font-size: 35px;
+  font-size: 18px;
 }
 .playlist-title,.video-artist,.video-duration,.video-title{
   margin: 0;

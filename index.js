@@ -152,7 +152,7 @@ function onAuth(){
     });
     request.execute(function(response) {
       if(response.result){
-        $("#video-list-container").empty();
+        $("#manage-playlists-list").empty();
         createPlaylistHTML("#manage-playlists-list", response.result.items);
         //Load videos
         $("#manage-playlists-list .playlist").each(function(){
