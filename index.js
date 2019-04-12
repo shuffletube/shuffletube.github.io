@@ -153,6 +153,9 @@ function nextVideoInPlaylist(response, shuffledItems){
         'onStateChange': function(e){
           if(e.data == YT.PlayerState.ENDED){
             videoIndex++;
+            if(videoIndex >= shuffledItems.length){
+              videoIndex=0;
+            }
             nextVideoInPlaylist(response, shuffledItems);
           }
         }
