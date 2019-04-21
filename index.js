@@ -143,6 +143,8 @@ function createVideoListHTML(target, videoList){
 var videoIndex = 0;
 var player;
 function nextVideoInPlaylist(response, shuffledItems){
+  $("#video-list-container .video-list").removeClass("active");
+  $("#video-list-container .video-list").eq(videoIndex).addClass("active");
   if($("#loading-video").is("img")){
     player = new YT.Player('loading-video', {
       height: '390',

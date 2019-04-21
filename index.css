@@ -393,6 +393,9 @@ input[type="text"]{
 #video-list-container{
   width: 50%;
   margin: 10px;
+  height: 100%;
+  margin-left: 10px;
+  overflow-y: scroll;
 }
 .video-list{
   border-radius: 0;
@@ -432,6 +435,15 @@ input[type="text"]{
 .video:last-child{
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+.video.active{
+  background-color: var(--link-color);
+}
+.video.active:hover{
+  background-color: var(--link-hov-color);
+}
+.video.active:active{
+  background-color: var(--link-act-color);
 }
 .video-thumbnail{
   height:37.5px;
