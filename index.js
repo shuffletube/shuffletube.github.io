@@ -183,8 +183,8 @@ function onAuth(){
         createPlaylistHTML("#manage-playlists-list", response.result.items);
         //Load videos
         $("#manage-playlists-list .playlist").each(function(){
-          $(this).click(function(){
-            let $this = $(this);
+          let $this = $(this);
+          $this.click(function(){
             let requestVideo = gapi.client.youtube.playlistItems.list({
               part: "snippet",
               playlistId: $this.attr("data-playlist-id"),
@@ -195,6 +195,20 @@ function onAuth(){
                 $("#video-list-container").empty();
                 // $("#video-list-container").find(".video-thumbnail").remove();
                 let shuffledItems = response.result.items.slice(0);
+                for(i = 1; i < response.result.pageInfo.totalResults; i++){
+                  let requestMoreVideo = gapi.client.youtube.playlistItems.list({
+                    part: "snippet",
+                    playlistId: $this.attr("data-playlist-id"),
+                    maxResults: 50,
+                    pageToken: response.result.nextPageToken
+                  });
+                  requestMoreVideo.execute(function(anotherResponse){
+                    shuffledItems = shuffledItems.concat(anotherResponse.result.items.slice(0));
+                  });
+                  //
+                }
+
+                //Randomize
                 for (i = shuffledItems.length - 1; i > 0; i--) {
                   let j = Math.floor(Math.random() * (i + 1));
                   [shuffledItems[i], shuffledItems[j]] = [shuffledItems[j], shuffledItems[i]];
