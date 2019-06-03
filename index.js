@@ -130,7 +130,7 @@ function createVideoListHTML(target, videoList){
   videoList.forEach(function(i){
     $(target).append(`
     <div class="video">
-      <img class="video-thumbnail" src="`+(typeof i.snippet.thumbnails.default.url === undefined?"shuffletubeloading.png":i.snippet.thumbnails.default.url)+`" alt="playlist">
+      <img class="video-thumbnail" src="`+(typeof i.snippet.thumbnails === undefined?"shuffletubeloading.png":i.snippet.thumbnails.default.url)+`" alt="playlist">
       <div class="video-discription-container">
         <h3 class="video-title">`+i.snippet.title+`</h3>
         <!--<p class="video-artist"></p>-->
