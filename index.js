@@ -194,6 +194,7 @@ function onAuth(){
                 $("#video-list-container").empty();
                 // $("#video-list-container").find(".video-thumbnail").remove();
                 let shuffledItems = response.result.items.slice(0);
+                console.log("total resutls: "+response.result.pageInfo.totalResults);
                 for(i = 1; i < response.result.pageInfo.totalResults; i++){
                   let requestMoreVideo = gapi.client.youtube.playlistItems.list({
                     part: "snippet",
