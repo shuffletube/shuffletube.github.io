@@ -64,7 +64,6 @@ $(function(){
       }
       activeSection.addClass("animated");
       oldActiveSection.addClass("animated");
-      console.log(oldActiveSection);
       oldActiveSection.one("webkitAnimationEnd mozAnimationEnd msAnimationEnd oAnimationEnd animationEnd",function(){
         $(this).removeClass("fadeInUp fadeInDown fadeOutUp fadeOutDown animated active").hide();
         $(this).css("width","auto");
@@ -101,7 +100,7 @@ $(function(){
 });
 //Inserts HTML for playlist
 function createPlaylistHTML(target, playlistItems){
-  console.log(playlistItems);
+  console.log("playlist items:"+playlistItems);
   playlistItems.forEach(function(i){
     if($(target).hasClass("playlist-list")){
       $(target).append(`
@@ -131,7 +130,7 @@ function createVideoListHTML(target, videoList){
   videoList.forEach(function(i){
     $(target).append(`
     <div class="video">
-      <img class="video-thumbnail" src="`+i.snippet.thumbnails.default.url+`" alt="playlist">
+      <img class="video-thumbnail" src="`+(typeof i.snippet.thumbnails.default.url === undefined?"shuffletubeloading.png":i.snippet.thumbnails.default.url)+`" alt="playlist">
       <div class="video-discription-container">
         <h3 class="video-title">`+i.snippet.title+`</h3>
         <!--<p class="video-artist"></p>-->
@@ -215,6 +214,7 @@ function onAuth(){
                   let j = Math.floor(Math.random() * (i + 1));
                   [shuffledItems[i], shuffledItems[j]] = [shuffledItems[j], shuffledItems[i]];
                 }
+                console.log("Shuffled Items: "+shuffledItems);
                 createVideoListHTML("#video-list-container", shuffledItems);
                 nextVideoInPlaylist(response, shuffledItems);
 
