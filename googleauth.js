@@ -60,7 +60,7 @@ var GoogleAuth;
       $('#authorization-overlay').hide();
       $("#execute-request-button").remove().off("click");
       $('<a class="nav" id="execute-request-button"><span class="min-screen-display">Sign Out</span><i class="material-icons">lock</i></a>').appendTo("nav");
-      $("#settings-revoke-access").append("#revoke-access-button");
+      $("#settings-revoke-access").append($("#revoke-access-button"));
       $("#revoke-access-button").click(revokeAccess);
       $('#execute-request-button').click(handleAuthClick);
       onAuth();
