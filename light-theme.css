@@ -14,12 +14,28 @@
   --link-hov-color: rgb(225,00,00);
   --link-act-color: rgb(205,00,00);
   --link-text-color: white;
+  --shadow-color: rgb(125,125,125);
 }
 header, input, button.search{
   background-color: var(--fg-contrast-color) !important;
 }
-.search-component input:not(:placeholder-shown)+button.search{
+/* .search-component input:not(:placeholder-shown)+button.search{
   background-color: var(--link-color) !important;
+} */
+::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("baseline_expand_more_black_18dp.png");
+}
+::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("baseline_expand_less_black_18dp.png");
+}
+::-webkit-scrollbar-button:horizontal:increment {
+  background-image: url("baseline_chevron_right_black_18dp.png");
+}
+::-webkit-scrollbar-button:horizontal:decrement{
+  background-image: url("baseline_chevron_left_black_18dp.png");
+}
+.search-component .search-category {
+  background-image: url("baseline_expand_more_black_18dp.png");
 }
 /* .search-component input:not(:placeholder-shown)+button.search i.material-icons{
   color: var(--link-text-color);
